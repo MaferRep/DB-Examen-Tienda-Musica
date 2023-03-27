@@ -1,0 +1,192 @@
+CREATE TABLE "artistas" (
+  "codigo_artista" SERIAL PRIMARY KEY NOT NULL,
+  "nombre_artista" text NOT NULL,
+  "pais_origen" text NOT NULL
+);
+
+CREATE TABLE "albumes" (
+  "codigo_album" SERIAL PRIMARY KEY NOT NULL,
+  "nombre_album" text NOT NULL,
+  "codigo_artista" int
+);
+
+CREATE TABLE "canciones" (
+  "codigo_cancion" SERIAL PRIMARY KEY NOT NULL,
+  "nombre_cancion" text NOT NULL,
+  "codigo_formato" int,
+  "codigo_genero" int,
+  "peso_bytes" int,
+  "duracion" time,
+  "precio" numeric NOT NULL,
+  "codigo_album" int
+);
+
+CREATE TABLE "genero" (
+  "codigo_genero" SERIAL PRIMARY KEY NOT NULL,
+  "nombre_genero" text UNIQUE NOT NULL
+);
+
+CREATE TABLE "playlist" (
+  "codigo_playlist" SERIAL PRIMARY KEY NOT NULL,
+  "nombre_playlist" text UNIQUE NOT NULL
+);
+
+CREATE TABLE "formato" (
+  "codigo_formato" SERIAL PRIMARY KEY NOT NULL,
+  "nombre_formato" text UNIQUE NOT NULL
+);
+
+CREATE TABLE "intermedia_playlist_cancion" (
+  "codigo_cancion" int,
+  "codigo_playlist" int
+);
+
+CREATE TABLE "intermedia_formato_cancion" (
+  "codigo_cancion" int,
+  "codigo_formato" int
+);
+
+CREATE TABLE "intermedia_genero_cancion" (
+  "codigo_cancion" int,
+  "codigo_genero" int
+);
+
+CREATE TABLE "factura" (
+  "codigo_factura" SERIAL PRIMARY KEY NOT NULL,
+  "fecha_factura" date NOT NULL,
+  "direccion" text NOT NULL,
+  "ciudad" text NOT NULL,
+  "estado" text NOT NULL,
+  "pais" text NOT NULL,
+  "codigo_postal" text,
+  "codigo_vendedor" int,
+  "codigo_cliente" int
+);
+
+CREATE TABLE "intermedia_factura" (
+  "codigo_factura" int,
+  "codigo_cancion" int,
+  "cantidad" int NOT NULL,
+  "precio_venta" numeric NOT NULL
+);
+
+CREATE TABLE "cliente" (
+  "codigo_cliente" SERIAL PRIMARY KEY NOT NULL,
+  "nombre" text NOT NULL,
+  "apellido" text NOT NULL,
+  "fecha_nacimiento" date NOT NULL,
+  "compania" text,
+  "direccion" text,
+  "ciudad" text,
+  "estado" text NOT NULL,
+  "pais" text NOT NULL,
+  "codigo_postal" text,
+  "telefono" text NOT NULL,
+  "email" text,
+  "asistente_encargado" int
+);
+
+CREATE TABLE "vendedor" (
+  "codigo_vendedor" SERIAL PRIMARY KEY NOT NULL,
+  "nombre" text NOT NULL,
+  "apellido" text NOT NULL,
+  "cargo" text NOT NULL,
+  "fecha_nacimiento" date NOT NULL,
+  "fecha_contratacion" date NOT NULL,
+  "direccion" text,
+  "ciudad" text,
+  "estado" text NOT NULL,
+  "pais" text NOT NULL,
+  "codigo_postal" text,
+  "telefono" text UNIQUE NOT NULL,
+  "email" text UNIQUE,
+  "manager_encargado" int
+);
+
+CREATE TABLE "manager" (
+  "codigo_manager" SERIAL PRIMARY KEY NOT NULL,
+  "nombre" text NOT NULL,
+  "apellido" text NOT NULL,
+  "cargo" text NOT NULL,
+  "fecha_nacimiento" date NOT NULL,
+  "fecha_contratacion" date NOT NULL,
+  "direccion" text,
+  "ciudad" text,
+  "estado" text NOT NULL,
+  "pais" text NOT NULL,
+  "codigo_postal" text,
+  "telefono" text UNIQUE NOT NULL,
+  "email" text UNIQUE,
+  "ceo_encargado" int
+);
+
+CREATE TABLE "ceo" (
+  "codigo_ceo" SERIAL PRIMARY KEY NOT NULL,
+  "nombre" text NOT NULL,
+  "apellido" text NOT NULL,
+  "cargo" text NOT NULL,
+  "fecha_nacimiento" date NOT NULL,
+  "fecha_contratacion" date NOT NULL,
+  "direccion" text,
+  "ciudad" text,
+  "estado" text NOT NULL,
+  "pais" text NOT NULL,
+  "codigo_postal" text,
+  "telefono" text UNIQUE NOT NULL,
+  "email" text UNIQUE
+);
+
+CREATE TABLE "asistente" (
+  "codigo_asistente" SERIAL PRIMARY KEY NOT NULL,
+  "nombre" text NOT NULL,
+  "apellido" text NOT NULL,
+  "cargo" text NOT NULL,
+  "fecha_nacimiento" date NOT NULL,
+  "fecha_contratacion" date NOT NULL,
+  "direccion" text,
+  "ciudad" text,
+  "estado" text NOT NULL,
+  "pais" text NOT NULL,
+  "codigo_postal" text,
+  "telefono" text UNIQUE NOT NULL,
+  "email" text UNIQUE,
+  "manager_encargado" int
+);
+
+ALTER TABLE "albumes" ADD FOREIGN KEY ("codigo_artista") REFERENCES "artistas" ("codigo_artista");
+
+ALTER TABLE "canciones" ADD FOREIGN KEY ("codigo_album") REFERENCES "albumes" ("codigo_album");
+
+ALTER TABLE "intermedia_formato_cancion" ADD FOREIGN KEY ("codigo_cancion") REFERENCES "canciones" ("codigo_cancion");
+
+ALTER TABLE "intermedia_formato_cancion" ADD FOREIGN KEY ("codigo_formato") REFERENCES "formato" ("codigo_formato");
+
+ALTER TABLE "intermedia_genero_cancion" ADD FOREIGN KEY ("codigo_cancion") REFERENCES "canciones" ("codigo_cancion");
+
+ALTER TABLE "intermedia_genero_cancion" ADD FOREIGN KEY ("codigo_genero") REFERENCES "genero" ("codigo_genero");
+
+ALTER TABLE "intermedia_playlist_cancion" ADD FOREIGN KEY ("codigo_playlist") REFERENCES "playlist" ("codigo_playlist");
+
+ALTER TABLE "intermedia_playlist_cancion" ADD FOREIGN KEY ("codigo_cancion") REFERENCES "canciones" ("codigo_cancion");
+
+ALTER TABLE "intermedia_factura" ADD FOREIGN KEY ("codigo_cancion") REFERENCES "canciones" ("codigo_cancion");
+
+ALTER TABLE "intermedia_factura" ADD FOREIGN KEY ("codigo_factura") REFERENCES "factura" ("codigo_factura");
+
+ALTER TABLE "vendedor" ADD FOREIGN KEY ("manager_encargado") REFERENCES "manager" ("codigo_manager");
+
+ALTER TABLE "manager" ADD FOREIGN KEY ("ceo_encargado") REFERENCES "ceo" ("codigo_ceo");
+
+ALTER TABLE "asistente" ADD FOREIGN KEY ("manager_encargado") REFERENCES "manager" ("codigo_manager");
+
+ALTER TABLE "cliente" ADD FOREIGN KEY ("asistente_encargado") REFERENCES "asistente" ("codigo_asistente");
+
+ALTER TABLE "factura" ADD FOREIGN KEY ("codigo_vendedor") REFERENCES "vendedor" ("codigo_vendedor");
+
+ALTER TABLE "factura" ADD FOREIGN KEY ("codigo_cliente") REFERENCES "cliente" ("codigo_cliente");
+
+ALTER TABLE canciones ADD CONSTRAINT precio CHECK  (precio>0);
+
+ALTER TABLE intermedia_factura ADD CONSTRAINT cantidad CHECK (cantidad>0);
+
+ALTER TABLE intermedia_factura ADD CONSTRAINT precio_venta CHECK (cantidad>0);

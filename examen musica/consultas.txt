@@ -1,0 +1,79 @@
+--Consultas
+
+SELECT AVG (precio) AS promedio_canciones FROM canciones; --promedio de las canciones 
+
+SELECT codigo_factura, SUM(cantidad * precio_venta) as total FROM intermedia_factura GROUP BY codigo_factura HAVING SUM(cantidad * precio_venta) > 1.6; -- facturas mayores a 1.6 no use 400$ porque mis canciones son de 1$
+
+SELECT CONCAT (nombre,' ', apellido) AS nombre_completo, cargo, fecha_nacimiento, fecha_contratacion, direccion, ciudad, estado, pais, codigo_postal, telefono, email FROM ceo UNION SELECT CONCAT(nombre,' ', apellido), cargo, fecha_nacimiento, fecha_contratacion, direccion, ciudad, estado, pais, codigo_postal, telefono, email FROM asistente UNION SELECT CONCAT(nombre,' ', apellido), cargo, fecha_nacimiento, fecha_contratacion, direccion, ciudad, estado, pais, codigo_postal, telefono, email FROM vendedor UNION SELECT CONCAT(nombre,' ', apellido), cargo, fecha_nacimiento, fecha_contratacion, direccion, ciudad, estado, pais, codigo_postal, telefono, email FROM manager; --lista de todos los empleados
+
+
+-- 15 consultas propias 
+
+SELECT codigo_factura, cantidad * precio_venta AS total FROM intermedia_factura WHERE cantidad * precio_venta > 0.99; --1 datos de los totales precio por cantidad delimitando los totales mayores a 0.99 
+
+SELECT* FROM canciones ca INNER JOIN intermedia_playlist_cancion pc ON ca.codigo_cancion=pc.codigo_cancion; -- 2 a que numero de album pertenece cada cancion
+
+SELECT* FROM canciones ca LEFT JOIN intermedia_playlist_cancion pc ON ca.codigo_cancion=pc.codigo_cancion WHERE pc.codigo_cancion IS NULL; --3 canciones excluidas, aquellas que no pertenecen a ninguna playlist 
+
+SELECT* FROM cliente INNER JOIN asistente ON asistente_encargado = codigo_asistente; --4 relacion asistentes correspondiente a los clientes
+
+SELECT peso_bytes, nombre_cancion FROM canciones ORDER BY peso_bytes DESC LIMIT 1; --5 cancion mas pesada en bytes 
+
+SELECT duracion, nombre_cancion FROM canciones ORDER BY duracion ASC LIMIT 1; --6 cancion mas corta, ejemplo de que se puede ordenar un time
+
+SELECT codigo_genero, count(*) AS cantidad FROM canciones GROUP BY codigo_genero; --7 cantidad de canciones que tienen el mismo genero
+
+SELECT * FROM canciones WHERE nombre_cancion LIKE 'D%'; --8 canciones que empiezan por la D
+
+SELECT* FROM vendedor INNER JOIN manager ON codigo_manager= manager_encargado; --9 informacion completa de los vendedores y sus managers encargados
+
+SELECT* FROM canciones ca INNER JOIN intermedia_playlist_cancion pc ON ca.codigo_cancion=pc.codigo_cancion; --10 todas las canciones que pertenecen a una playlist
+
+SELECT COUNT (*) AS albumes_lanzados, nombre_artista FROM albumes alb INNER JOIN artistas art ON alb.codigo_artista = art.codigo_artista GROUP BY nombre_artista; --11 cuantos albumes ha sacado cada artista
+
+SELECT fecha_contratacion, CONCAT (nombre,' ', apellido) AS nombre_completo, telefono FROM vendedor ORDER BY fecha_contratacion DESC LIMIT 1; --12 vendedor mas recientemente contratado
+
+SELECT COUNT(*) AS cantidad_canciones FROM canciones ca JOIN genero g ON g.codigo_genero = ca.codigo_genero WHERE nombre_genero='rock'; --13 saber cuantas canciones de rock hay sin colocar el codigo_genero sino solo con el nombre
+
+SELECT AVG (duracion) AS duracion_promedio_canciones FROM canciones; --15 duracion promedio de las canciones --14 duracion promedio por cancion
+
+SELECT SUM(duracion) AS duracion_album, codigo_album FROM canciones GROUP BY codigo_album; --15 duracion de cada album por codigo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

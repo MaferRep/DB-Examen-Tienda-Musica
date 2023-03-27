@@ -1,0 +1,96 @@
+--rellenando tablas
+
+INSERT INTO albumes VALUES (default, 'Humanz');
+INSERT INTO artistas VALUES (default, 'gorillaz', 'Inglaterra');
+
+UPDATE albumes SET codigo_artista=1 WHERE nombre_album='Humanz';
+
+--ejemplo para actualizar la tabla en caso de error
+INSERT INTO artistas VALUES (default, 'Avenged sevenfold', 'Estados Unidos');
+INSERT INTO artistas VALUES (default, 'Bad bunny', 'Puerto Rico');
+
+INSERT INTO albumes VALUES (default, 'Nightmare', 2);
+INSERT INTO albumes VALUES (default, 'Demon Days', 1);
+INSERT INTO albumes VALUES (default, 'El ultimo tour del mundo', 3); 
+
+INSERT INTO genero VALUES (default, 'rock');
+INSERT INTO genero VALUES (default, 'alternativa');
+INSERT INTO genero VALUES (default, 'gaita');
+INSERT INTO genero VALUES (default, 'metal');
+INSERT INTO genero VALUES (default, 'trap');
+
+INSERT INTO formato VALUES (default, 'MQA');
+INSERT INTO formato VALUES (default, 'mp3');
+INSERT INTO formato VALUES (default, 'CD');
+INSERT INTO formato VALUES (default, 'FLAC');
+INSERT INTO formato VALUES (default, 'OGG');
+INSERT INTO formato VALUES (default, 'CASETE');
+
+INSERT INTO canciones VALUES (default, 'Saturn Barz', 2, 2, 300000, '00:03:05', 1, 1);
+INSERT INTO canciones VALUES (default, 'Andromeda', 2, 2, '400000', '00:03:17', 1.50, 1);
+INSERT INTO canciones VALUES (default, 'Danger Line', 5, 4, 567000, '00:05:28', 0.99, 2);
+INSERT INTO canciones VALUES (default, 'So far Away', 5, 4, 577000, '00:05:20', 1, 2);
+INSERT INTO canciones VALUES (default, 'Victim', 5, 4, 597000, '00:07:30', 1.99, 2);
+INSERT INTO canciones VALUES (default, 'El manana', 3, 1, 594400, '00:03:57', 1.50, 3);
+INSERT INTO canciones VALUES (default, 'Feel Good Inc', 2, 1, 594400, '00:03:43', 1.50, 3);
+INSERT INTO canciones VALUES (default, 'Dakiti', 5, 5, 594400, '00:03:25', 3, 4);
+INSERT INTO canciones VALUES (default, 'Cantares de Navidad', 1, 3, 2424242, '00:03:20', 2, 4);
+
+INSERT INTO playlist VALUES (default ,'Musica viejita'); 
+INSERT INTO playlist VALUES (default ,'Musica nueva'); 
+
+INSERT INTO intermedia_formato_cancion VALUES (1,2); 
+INSERT INTO intermedia_formato_cancion VALUES (2,2); 
+INSERT INTO intermedia_formato_cancion VALUES (3,5); 
+INSERT INTO intermedia_formato_cancion VALUES (4,5); 
+INSERT INTO intermedia_formato_cancion VALUES (5,5);
+INSERT INTO intermedia_formato_cancion VALUES (6,3); 
+INSERT INTO intermedia_formato_cancion VALUES (7,2);
+INSERT INTO intermedia_formato_cancion VALUES (8,5); 
+INSERT INTO intermedia_formato_cancion VALUES (9,1); 
+
+INSERT INTO intermedia_genero_cancion VALUES (1,2);
+INSERT INTO intermedia_genero_cancion VALUES (2,2);
+INSERT INTO intermedia_genero_cancion VALUES (3,4);
+INSERT INTO intermedia_genero_cancion VALUES (4,4);
+INSERT INTO intermedia_genero_cancion VALUES (5,4);
+INSERT INTO intermedia_genero_cancion VALUES (6,1);
+INSERT INTO intermedia_genero_cancion VALUES (7,1);
+INSERT INTO intermedia_genero_cancion VALUES (8,5);
+INSERT INTO intermedia_genero_cancion VALUES (9,3);
+
+INSERT INTO intermedia_playlist_cancion VALUES (1,1);
+INSERT INTO intermedia_playlist_cancion VALUES (2,1);
+INSERT INTO intermedia_playlist_cancion VALUES (3,1);
+INSERT INTO intermedia_playlist_cancion VALUES (4,1);
+INSERT INTO intermedia_playlist_cancion VALUES (5,1);
+INSERT INTO intermedia_playlist_cancion VALUES (7,1);
+INSERT INTO intermedia_playlist_cancion VALUES (8,2);
+INSERT INTO intermedia_playlist_cancion VALUES (9,2);
+INSERT INTO intermedia_playlist_cancion VALUES (8,1); --ejemplo de que una cancion puede estar en varias playlist
+
+INSERT INTO ceo VALUES (default,'maria victoria','boscan romero', 'ceo', '2008-02-11', '2020-06-26', 'el naranjal', 'maracaibo', 'zulia', 'venezuela', '4001', '0424-5550000', 'vico@gmail.com');
+ 
+INSERT INTO manager VALUES (default,'maria paula','lopez rincon', 'manager', '1999-06-27', '2020-12-24', 'viento norte', 'maracaibo', 'zulia', 'venezuela', '4001', '0424-5550000', 'paula@gmail.com', 1);
+INSERT INTO manager VALUES (default,'marianny mercedes','romero rincon', 'manager', '1977-09-24', '2021-01-29', 'la cascada', 'maracaibo', 'zulia', 'venezuela', '4001', '0424-555687', 'marianny@gmail.com', 1);
+
+INSERT INTO vendedor VALUES (default,'Ana del carmen','rincon ocando', 'vendedor', '1964-01-10', '2021-02-10', 'la paragua', 'maracaibo', 'zulia', 'venezuela', '4001', '0424-511187', 'ana@gmail.com', 1);
+INSERT INTO vendedor VALUES (default,'Marjerys andrea','rincon rincon', 'vendedor', '1980-03-10', '2021-03-15', 'acuarelas del sol', 'maracaibo', 'zulia', 'venezuela', '4001', '0424-54511187', 'marjerys@gmail.com', 1);
+INSERT INTO vendedor VALUES (default,'Maria laura','rincon rincon', 'vendedor', '1997-03-19', '2021-04-16', 'el bosque', 'maracaibo', 'zulia', 'venezuela', '4001', '0424-5455557', 'marialaura@gmail.com', 2);
+
+INSERT INTO asistente VALUES (default,'Adrian alejandro','molina saravia', 'asistente', '2003-03-14', '2021-05-10', 'sabaneta', 'maracaibo', 'zulia', 'venezuela', '4001', '0424-511187', 'adrian@gmail.com', 1);
+INSERT INTO asistente VALUES (default,'Marcos de jesus','fuenmayor', 'asistente', '1998-08-06', '2021-05-20', 'sabaneta', 'maracaibo', 'zulia', 'venezuela', '4001', '0424-5144321187', 'marcos@gmail.com', 2);
+
+INSERT INTO cliente VALUES (default, 'maria fernanda', 'boscan romero', '2002-05-03', 'mafer.inc','la picola', 'maracaibo', 'zulia', 'venezuela', '4001', '0424-6467221', 'mfbr352@gmail.com',1); 
+INSERT INTO cliente VALUES (default, 'juan pablo', 'boscan sanchez', '1968-08-11', 'juan.inc', 'sabaneta', 'maracaibo', 'zulia', 'venezuela', '4001', '0424-6333333', 'juan@gmail.com',2);
+INSERT INTO cliente VALUES (default, 'juan jose', 'diaz sanchez', '1963-02-11', 'juan.inc', 'sabaneta', 'maracaibo', 'zulia', 'venezuela', '4001', '0424-63334567333', 'jose@gmail.com', 1);
+
+INSERT INTO factura VALUES (default,'2021-06-25','viento norte', 'maracaibo', 'zulia', 'venezuela', '4001', 2, 1);
+INSERT INTO factura VALUES (default,'2021-07-25','la rosaria', 'maracaibo', 'zulia', 'venezuela', '4001', 1, 2);
+
+INSERT INTO intermedia_factura VALUES (1, 2, 1, 1.5);
+INSERT INTO intermedia_factura VALUES (2, 5, 2, 1.99); -- en este caso compro dos veces la cancion 5 
+-- el precio puede variar por eso se coloca el precio_venta en que se vendio la cancion ese dia, si no coloco eso al actualizar el precio en cancion se me cambiarian todas las facturas y esto es falso
+INSERT INTO intermedia_factura VALUES (2, 3, 1, 1.0); -- en este caso coloque otra cancion en la factura 2
+
+  
